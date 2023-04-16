@@ -1,15 +1,13 @@
 let btn = document.querySelector(".btn")
 let result = document.querySelector(".result")
+let inputField = document.querySelector(".inputField").innerHTML
 
 
-// const ACCESS_KEY:  "DRyWQshwghkCo9Ls_D22kCtG0JYWnKgo3O-yElpbB38";
-// const unsplashEndpoint = `https://api.unsplash.com/search/photos?client_id=${"DRyWQshwghkCo9Ls_D22kCtG0JYWnKgo3O-yElpbB38"}&query=`;
-// const response = fetch(unsplashEndpoint + searchName)
 
-const fetchData = async (searchName) => {
+const fetchData = async (inputField) => {
     let url = `https://api.unsplash.com/search/photos?client_id=${"DRyWQshwghkCo9Ls_D22kCtG0JYWnKgo3O-yElpbB38"}&query=`
     try{
-        let res = await fetch(url + searchName)
+        let res = await fetch(url + inputField)
         let data = await res.json()
         console.log(data.results[0])
         return(data.results[0])
@@ -19,11 +17,12 @@ const fetchData = async (searchName) => {
     }
 }
 
-const renderData = async (searchName) => {
+const renderData = async () => {
     let data = await fetchData()
 
 
-    let content = `<p>${data.results[0].description}</p>`
+    let content = ` <img src="${data.urls.regular}" />
+                    <p>${data.description}</p>`
 
     result.innerHTML = content;
 }
